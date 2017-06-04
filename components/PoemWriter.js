@@ -12,7 +12,7 @@ function validatePoem(poem) {
 
 function validateLine(line, wordCount) {
     if (line) {
-      return line.split(' ').filter(function(x) {return x}).length < wordCount
+      return line.split(' ').filter(function(x) {return x}).length == wordCount
     } else {
       return false
     }
@@ -39,7 +39,7 @@ export default class PoemWriter extends React.Component {
     return (
       <div>
         <textarea rows="3" cols="60" onChange={this.handleChange} value={this.state.value}/>
-        {this.state.validPoem ? : <div id="poem-validation-error" style={{color: 'red'}}>This poem is not written in the right structure!</div>}
+        {this.state.validPoem ? <div/> : <div id="poem-validation-error" style={{color: 'red'}}>This poem is not written in the right structure!</div>}
       </div>
     );
   }
