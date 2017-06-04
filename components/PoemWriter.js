@@ -1,22 +1,13 @@
 import React from 'react';
 
-function validatePoem(poem) {
-   let poemArr = poem.split('\n').filter(function(x) {return x});
-  return (
-          validateLine(poemArr[0], 5) &&
-          validateLine(poemArr[1], 3) &&
-          validateLine(poemArr[2], 5) &&
-          poemArr.length === 3
-        );
-}
-
 function validateLine(line, wordCount) {
-    if (line) {
-      return line.split(' ').filter(function(x) {return x}).length == wordCount
-    } else {
-      return false
-    }
-}
+     if (line) {
+       return line.split(' ').filter(function(x) {return x}).length == wordCount
+     } else {
+       return false
+     }
+ }
+
 
 export default class PoemWriter extends React.Component {
   constructor() {
@@ -26,11 +17,29 @@ export default class PoemWriter extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  validatePoem(poem) {
+     let poemArr = poem.split('\n').filter(function(x) {return x});
+    return (
+            validateLine(poemArr[0], 5) &&
+            this.validateLine(poemArr[1], 3) &&
+            this.validateLine(poemArr[2], 5) &&
+            poemArr.length === 3
+          );
+  }
+
+ validateLine(line, wordCount) {
+      if (line) {
+        return line.split(' ').filter(function(x) {return x}).length == wordCount
+      } else {
+        return false
+      }
+  }
+
   handleChange(event) {
     if (event.target.value) {
           this.setState({
           value: event.target.value,
-          validPoem: validatePoem( event.target.value)
+          validPoem: this.validatePoem( event.target.value)
           });
       }
   }
